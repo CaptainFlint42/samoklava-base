@@ -135,6 +135,32 @@ outlines:
     - name: panel
     - operation: subtract
       name: keys
+  screw__holes: 
+    holeTopLeft:
+      what: circle
+      where:
+        ref: [matrix_two_top]
+        shift: [0.5kx, -0.3ky]
+      radius: 1.05
+    holeBottomLeft:
+      what: circle
+      where:
+       ref: [encodercontrols_encoder_bottom]
+       shift: [0.5kx, -0.3ky]
+      radius: 1.05
+    holeTopRight:
+      what: circle
+      where:
+        ref: [matrix_nine_top]
+        shift: [0.5kx, -0.3ky]
+      radius: 1.05
+    holeBottomRight:
+      what: circle
+      where:
+        ref: [entercontrols_enter_bottom]
+        shift: [2kx, -0.3ky]
+      radius: 1.05
+
   switch_cutouts:
     - what: rectangle
       where: true
@@ -150,6 +176,7 @@ outlines:
       what: outline
       name: switch_cutouts
       operation: subtract
+      
 pcbs:
   FlintKBUv1:
     outlines:
@@ -215,24 +242,249 @@ pcbs:
           ref: matrix_one_row2
           shift: [-0.3kx, -1ky]
           rotate: -90
-     ## holeTopLeft:
-     ##   what: mountinghole
-     ##   where:
-     ##     ref: [matrix_one_top]
-     ##     shift: [0.5kx, -0.3ky]
-     ## holeBottomLeft:
-     ##   what: mountinghole
-     ##   where:
-     ##     ref: [encodercontrols_encoder_bottom]
-     ##     shift: [0.5kx, -0.3ky]
+     
 
-     ## holeTopRight:
-     ##   what: mountinghole
-     ##   where:
-     ##     ref: [matrix_nine_top]
-     ##     shift: [0.5kx, -0.3ky]
-     ## holeBottomRight:
-     ##   what: mountinghole
-     ##   where:
-     ##     ref: [entercontrols_enter_bottom]
-     ##     shift: [2kx, -0.3ky]
+units:
+  # Proxy Spacing Variables
+  kx: U
+  ky: U
+  # Padding Variables
+  px: kx + 4
+  py: ky + 4
+
+points:
+  zones:
+    matrix:
+      anchor:
+        shift: [100, -200]
+      columns:
+        one:
+          rows.bottom.skip: true
+          key:
+            column_net: P2
+            column_mark: 1
+            bind: [0, 0]
+        two:
+          rows.bottom.skip: true
+          key:
+            spread: kx
+            column_net: P3
+            column_mark: 2
+            bind: [1kx, 0]
+        three:
+          key:
+            spread: kx
+            column_net: P4
+            column_mark: 3
+        four:
+          key:
+            spread: kx
+            column_net: P5
+            column_mark: 4
+        five:
+          key:
+            spread:  kx
+            column_net: P6
+            column_mark: 5
+        six:
+          rows.bottom.skip: true
+          key:
+            spread:  kx
+            column_net: P7
+            column_mark: 6
+        seven:
+          rows.bottom.skip: true
+          key:
+            spread:  kx
+            column_net: P8
+            column_mark: 7
+        eight:
+          rows.bottom.skip: true
+          key:
+            spread:  kx
+            column_net: P9
+            column_mark: 8
+        nine:
+          rows.bottom.skip: true
+          key:
+            spread:  kx
+            column_net: P10
+            column_mark: 9
+       
+      rows:
+        bottom:
+          padding: ky
+          row_net: P16
+        row2:
+          padding: ky
+          row_net: P14
+        row3:
+          padding: ky
+          row_net: P15
+        row4:
+          padding: ky
+          row_net: P18
+        row5:
+          padding: ky
+          row_net: P19
+        top:
+          padding: ky
+          row_net: P20
+            
+    entercontrols: 
+      anchor:
+         ref: matrix_seven_bottom
+         shift: [ 0.5kx, 0]
+      columns:
+        enter:
+          key:
+            width: 2kx
+            column_mark: 7
+            column_net: P8
+            bind: [1.5kx, 0]
+      rows:
+              bottom:
+                row_net: P16
+    encodercontrols: 
+      anchor:
+         ref: matrix_one_bottom
+         shift: [ 0.5kx, 0]
+      columns:
+        encoder:
+          key:
+          ##  column_mark: 1
+           ## column_net: P2
+            bind: [0.5kx, 0]
+      rows:
+        bottom:
+          row_net: P16
+
+outlines:
+  raw:
+    - what: rectangle
+      where: true
+      bound: true
+      asym: left
+      size: [px, py]
+      corner: 1
+  keys:
+    - what: rectangle
+      where: true
+      size: [kx-0.5,ky-0.5]
+  panel:
+    - what: outline
+      name: raw
+      bound: true
+      fillet: 2
+  combopreview:
+    - name: panel
+    - operation: subtract
+      name: keys
+  screw__holes: 
+    holeTopLeft:
+      what: circle
+      where:
+        ref: [matrix_two_top]
+        shift: [0.5kx, -0.3ky]
+      radius: 1.05
+    holeBottomLeft:
+      what: circle
+      where:
+       ref: [encodercontrols_encoder_bottom]
+       shift: [0.5kx, -0.3ky]
+      radius: 1.05
+    holeTopRight:
+      what: circle
+      where:
+        ref: [matrix_nine_top]
+        shift: [0.5kx, -0.3ky]
+      radius: 1.05
+    holeBottomRight:
+      what: circle
+      where:
+        ref: [entercontrols_enter_bottom]
+        shift: [2kx, -0.3ky]
+      radius: 1.05
+
+  switch_cutouts:
+    - what: rectangle
+      where: true
+      asym: left
+      size: 14
+      bound: false
+  switch_plate:
+    main:
+      what: outline
+      name: panel
+      fillet: 0.5
+    keyholes:
+      what: outline
+      name: switch_cutouts
+      operation: subtract
+      
+pcbs:
+  FlintKBUv1:
+    outlines:
+      main:
+        outline: panel
+    footprints:
+      choc:
+        what: choc
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{column_net}}"
+          keycaps: true
+          hotswap: false
+      diode:
+        what: diode
+        where: true
+        adjust:
+          rotate: 0
+          shift: [ 0, -5 ]
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+          ## via_in_pad: true
+          ## through_hole: false
+     ##
+
+## EC11 rotary encoder
+##
+## Nets
+##    from: corresponds to switch pin 1 (for button presses)
+##    to: corresponds to switch pin 2 (for button presses)
+##    A: corresponds to pin 1 (for rotary)
+##    B: corresponds to pin 2 (for rotary, should be GND)
+##    C: corresponds to pin 3 (for rotary)
+##      encoder
+##        what:rotary
+##       where:
+##         ref: encodercontrols_encoder_key
+##          shift: [0,0]
+##        params:
+##          designator: 'ROT'
+##          from: P18
+##          to: P19
+##          A: P20
+##          B: GND
+##          C: P21
+     
+      promicro:
+        what: promicro
+        where:
+          ref: matrix_one_top
+          shift: [0, -6]
+          rotate: -90
+        params:
+          orientation: down
+      reset:
+        what: button
+        params:
+          from: GND
+          to: RST
+        where:
+          ref: matrix_one_row2
+          shift: [-0.3kx, -1ky]
+          rotate: -90
+     
